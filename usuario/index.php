@@ -1,3 +1,5 @@
+   
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -43,7 +45,7 @@
 
 								<div class="input-field col s12 m12 ">                  
 									<input id="nome_registro" type="text" class="validate">
-									<label for="nome_registro" label class="active ">Nome*</label>
+									<label for="nome_registro" label class="active">Nome*</label>
 								</div>
 
 								<div class="input-field col s12  m12 ">
@@ -53,7 +55,7 @@
 
 								<div class="input-field col s12  m12 ">
 									<input id="cpf_registro" type="text" class="validate">
-									<label for="cpf_registro" label class="active required placeholder="000.000.000.00">CPF*</label>
+									<label for="cpf_registro" label class="active">CPF*</label>
 								</div>
 
 								<div class="input-field col s12  m12 ">

@@ -24,18 +24,18 @@ class Usuario{
 		id,
 		nome,
 		cpf,
-		email,
+		sobrenome,
 		senha,
-		sobrenome
+		email
 		)
 		VALUES
 		(
 		'$this->id',
 		'$this->nome',
 		'$this->cpf',
-		'$this->email',
+		'$this->sobrenome',
 		'$this->senha',
-		'$this->sobrenome'
+		'$this->email'
 		);
 		";
 
@@ -90,7 +90,7 @@ class Usuario{
 		UPDATE usuario SET
 		nome = '$this->nome',
 		cpf = '$this->cpf',
-		email = '$this->email'
+		email = '$this->email',
 		sobrenome = '$this->sobrenome'
 		
 		WHERE id = '$this->id'
