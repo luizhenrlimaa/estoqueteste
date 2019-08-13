@@ -88,12 +88,8 @@ session_start();
 
 <script type="text/javascript">
 
-  /*Para fazer o select aparecer*/
-  window.onload=function(){
-    $(document).ready(function() {
-      $('select').material_select();
-    });
-  }
+ 
+
   $(document).ready(function(e) {
 
     $('#login_usuario').click(function(e) {
@@ -101,7 +97,6 @@ session_start();
 
       var email_login = $('#email_login').val();
       var senha_login = $('#senha_login').val();
-   
 
       if(email_login == "" || senha_login == ""){
         return mbox.alert('Preencha todos os campos!');
@@ -115,7 +110,7 @@ session_start();
           success: function(data){
             obj = JSON.parse(data);
             if(obj.res === 'true'){
-              window.location = "usuario/index.php";
+              window.location = "index.php";
             } else if(obj.res === 'no_user_found') {
               return mbox.alert('Usuário não encontrado.');
             } else if(obj.res === 'wrong_password') {
