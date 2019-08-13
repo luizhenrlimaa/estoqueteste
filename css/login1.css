@@ -1,0 +1,65 @@
+
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700|Lato:400,700);
+
+html, body{
+  background-image: url(../img/background.png);
+  background-size: fixed;
+  background-repeat: no-repeat;
+}
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-page {
+  width: 360px;
+  padding: 3% 0 0;
+  margin: auto;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  max-width: 360px;
+  margin: -40px auto 50px;
+  padding: 45px 45px 10px 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form button {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  outline: 0;
+  background: #26a69a;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #249489;
+}
+
+@media screen and (max-width: 600px) {
+    .form{
+      margin: -20px auto 50px;
+    }
+
+/* body {
+  //background: #1f1a17;  fallback for old browsers 
+  background: -webkit-linear-gradient(right, #1f1a17);
+  background: -moz-linear-gradient(right, #1f1a17);
+  background: -o-linear-gradient(right, #1f1a17);
+  background: linear-gradient(to left, #1f1a17);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+} */

@@ -1,0 +1,403 @@
+.drag-target {
+	height: 100%;
+	width: 10px;
+	position: fixed;
+	top: 0;
+	z-index: 998;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+	font-size: 16px;
+	color: #222;
+	display: block;
+	line-height: 22px;
+	padding: 14px 16px;
+}
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=time]:not(.browser-default):focus:not([readonly]),
+input[type=date]:not(.browser-default):focus:not([readonly]),
+input[type=datetime]:not(.browser-default):focus:not([readonly]),
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+input[type=tel]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=search]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+	border-bottom: 1px solid #222;
+	-webkit-box-shadow: 0 1px 0 0 #222;
+	box-shadow: 0 1px 0 0 #222;
+}
+
+input:not([type]):focus:not([readonly]) + label,
+input[type=text]:not(.browser-default):focus:not([readonly]) + label,
+input[type=password]:not(.browser-default):focus:not([readonly]) + label,
+input[type=email]:not(.browser-default):focus:not([readonly]) + label,
+input[type=url]:not(.browser-default):focus:not([readonly]) + label,
+input[type=time]:not(.browser-default):focus:not([readonly]) + label,
+input[type=date]:not(.browser-default):focus:not([readonly]) + label,
+input[type=datetime]:not(.browser-default):focus:not([readonly]) + label,
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label,
+input[type=tel]:not(.browser-default):focus:not([readonly]) + label,
+input[type=number]:not(.browser-default):focus:not([readonly]) + label,
+input[type=search]:not(.browser-default):focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label {
+	color: #222;
+}
+
+body, html{
+	background-image: url(../img/background.png);
+	background-size: cover;
+}
+
+/* ================================== Barra de navegação =============================== */
+h2 {
+	font-size: 2em;
+}
+.navbar-fixed {
+	z-index: 1997; 
+}
+
+#nav-home{
+	background-color: #bbb;
+}
+
+#nav-psicologia{
+	background-color: #34a5a1;
+}
+
+#nav-pericia{
+	background-color: #F9EB87;
+}
+
+#nav-adm{
+	background-color: #fff;
+}
+
+nav a:hover, nav a:focus{
+	text-decoration: none;
+	color: #fff;
+}
+.center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+nav li a{
+	font-size: 13px;
+	/*text-transform: uppercase;*/
+}
+
+nav li a:hover{
+	font-size: 13px;
+	color: white;
+}
+
+.img-nav{
+	width: 150px; 
+	height: auto;
+	margin-top: 15px;
+}
+
+.img-nav1{
+	width: 100px; 
+	height: auto;
+	margin-top: 5px;
+}
+
+@media screen and (max-width: 600px) {
+	.img-nav1{
+		width: 100px; 
+		height: auto;
+		margin-top: 1px;
+	}
+}
+
+#menu-mobile li a{
+	font-size: 14px;
+	color: black;
+}
+
+#menu-mobile li i{
+	color: black;
+}
+
+#menu-mobile li a:hover{
+	font-size: 14px;
+	color: black;
+}
+
+/* ============================= Fim da Barra de navegação ============================ */
+
+/*===================== breadcrumb ========================================*/
+.clean{
+	background: none;
+	box-shadow: none;
+}
+
+#bread-desativado{
+	color: #777;
+}
+
+.breadcrumb{
+	color: rgba(0,0,0,1);
+}   
+
+.breadcrumb:before{
+	color: rgba(0,0,0,0.7);
+}
+.breadcrumb:hover{
+	color: black;
+}
+
+/*===================== end breadcrumb ========================================*/
+
+/* ============================= Formularios mais visíveis =============================*/
+.input-field  label, label{
+	color: #444;
+}
+
+.input-field input[type="radio"][disabled] + label {
+	color: #444;
+}
+
+.input-field input[type="text"][disabled] + label {
+	color: #444;
+}
+
+.input-field input[type="text"][disabled]{
+	color: #777;
+}
+
+.input-field input[type="email"][disabled] + label {
+	color: #444;
+}
+
+.input-field input[type="email"][disabled]{
+	color: #777;
+}
+
+.input-field input[type="password"][disabled] + label {
+	color: #444;
+}
+
+.input-field input[type="password"][disabled]{
+	color: #777;
+}
+
+[type="radio"]:disabled:checked + label:after {
+	background-color: #777;
+	border-color: #777;
+}
+
+.input-field textarea[disabled] + label {
+	color: #444;
+}
+
+.input-field textarea[disabled] {
+	color: #777;
+}
+
+::-webkit-input-placeholder {
+	color: #777;
+}
+/*=====================================END=======================================*/
+
+/* ========================== Personalização dos cards da home ==================*/
+.home{
+	min-height: 100vh;
+}
+
+.home ul{
+	margin: -10px
+}
+
+.home li{
+	font-weight: 400;
+	font-size: 1.1em;
+	margin-bottom: 10px;
+}
+
+.home a{
+	color: #555;
+}
+
+#psico a:hover{
+	color: #34a5a1;
+}
+
+#odonto a:hover{
+	color: #f44336 ;
+}
+
+#pericia a:hover{
+	color: #fbc02d ;
+}
+
+#segtrab a:hover{
+	color: #4caf50 ;
+}
+
+#acessi a:hover{
+	color: #32829e;
+}
+
+#ocorrencia a:hover{
+	color: #b33939;
+}
+
+/*=== area psicologo*/
+.area-psicologo{
+	background: #fff;
+	color: #222;
+}
+
+.area-psicologo:hover{
+	background: #34a5a1;
+	transition: 0.5s;
+	color: white;
+}
+/*==== end =========*/
+
+/*=== area user externo*/
+.user-externo{
+	background: #fff;
+	color: #222;
+}
+
+.user-externo:hover{
+	background: #4db6ac;
+	color: white;
+	transition: 0.5s;
+}
+
+.area-pericia{
+	background: #fff;
+	color: #222;
+}
+
+.area-pericia:hover{
+	background: #F9EB87;
+	color: #444;
+	transition: 0.5s;
+}
+/*==== end =========*/
+
+/*=========================================END===================================*/
+
+/*========================== links das tabelas de agendamento ================================*/
+.container-fluid{
+	margin-left: 20px; 
+	margin-right: 20px;
+}
+
+.desmarcar, .alterar, .inativar{
+	transition: all .50s;
+}
+
+.desmarcar:hover{
+	cursor:pointer;
+	background: rgba(255,51,0,.50);	
+}
+
+.reagendar:hover{
+	cursor:pointer;
+	background: rgba(255,140,0,.50);
+}
+
+
+.alterar:hover{
+	cursor:pointer;
+	background: rgba(46, 204, 113, 0.7);
+}
+
+.inativar:hover{
+	cursor:pointer;
+	background: rgba(255,140,0,.50);
+}
+
+@media screen and (max-width: 600px) {
+	.title_responsivo{
+		font-size: 30px;
+	}
+}
+
+td, th {
+  padding: 10px 0px;
+}
+/*==================== end ====================================================*/
+
+/* ================================ Footer ======================================*/
+.footer-home{
+	background-color: #bbb;
+	color: black;
+	padding: 10px;
+}
+
+.footer-psicologia{
+	background-color: #34a5a1;
+	color: black;
+	padding: 10px;
+}
+
+.footer-pericia{
+	background-color: #F9EB87;
+	color: black;
+	padding: 10px;
+}
+
+.footer-adm{
+	background-color: #fff;
+	color: black;
+	padding: 10px;
+}	
+/* ============================= Fim do footer =================================*/
+
+/*============================== barra de rolagem =================================*/
+
+::-webkit-scrollbar-track {
+	background-color: #aaa;
+}
+::-webkit-scrollbar {
+	width: 10px;
+}
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+.arq_ver:hover{
+	background: #2980b9;
+	transition: 0.5s;
+	color: white;
+}
+
+.arq_baixar:hover{
+	background: #2ecc71;
+	transition: 0.5s;
+	color: white;
+}
+
+.arq_apagar:hover{
+	background: #e74c3c;
+	transition: 0.5s;
+	color: white;
+}
+
+.preloader-background {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, .8);
+
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+

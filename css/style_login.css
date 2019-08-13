@@ -1,0 +1,31 @@
+html,
+
+body {
+  height: 100%;
+}
+
+html {
+  display: table;/*deixa no formato de card*/
+  margin: auto;
+}
+
+body {
+  display: table-cell;
+  vertical-align: middle; /*desce o card*/
+  background:  rgba(189, 195, 199,1.5);
+}
+
+#login-page{
+  width: 400px;
+}
+
+.card{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform:translate(-50%, -50%);
+  -ms-transform:translate(-50%, -50%);
+  -o-transform:translate(-50%, -50%);
+  transform:translate(-50%, -50%);
+}
