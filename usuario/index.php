@@ -1,4 +1,10 @@
-   
+<?php
+$showerros = true;
+if($showerros) {
+	ini_set("display_errors", $showerros);
+	error_reporting(E_ALL ^ E_NOTICE ^ E_STRICT);
+}
+?>   
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -6,6 +12,8 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	
+
 	<title>Estoque</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -21,11 +29,11 @@
 
 		main {
 			flex: 1 0 auto;
-			background:  #708090;
+			background:#708090;
 		}
 
 		body {
-			background:  	#C0C0C0;
+			background: #C0C0C0;
 		}
 	</style>
 
@@ -62,71 +70,82 @@
 									<input id="senha_registro" type="password" class="validate">
 									<label for="senha_registro" label class="active">Senha*</label>
 								</div>
-							
-							<div class="input-field col s12  m12 ">
-								<input id="email_registro" type="email" class="validate">
-								<label for="email_registro" label class="active">E-mail*</label>
+
+								<div class="input-field col s12  m12 ">
+									<input id="email_registro" type="email" class="validate">
+									<label for="email_registro" label class="active">E-mail*</label>
+								</div>
+
 							</div>
 
-						</div>
+							<div class="modal-footer">
+								<center><button id="registrar_usuario" class="modal-action modal-close waves-effect waves-light btn medium-small darken-3">Registrar <i class="fa fa-arrow-right"></i></button></center>
+							</div>
 
-						<div class="modal-footer">
-							<center><button id="registrar_usuario" class="modal-action modal-close waves-effect waves-light btn medium-small darken-3">Registrar <i class="fa fa-arrow-right"></i></button></center>
-						</div>
-
-					</form>
-				</center>
-			</div> 
-		</div>
-	</main>
-</body>
-</html>
+						</form>
+					</center>
+				</div> 
+			</div>
+		</main>
+	</body>
+	</html>
 
 
-<script src="../js/jquery.js"></script>
-<script src="../js/materialize.js"></script>
-<script src="../js/jquerymask.min.js"></script>
-<script src="../js/mbox-0.0.1.js"></script>
+	<script src="../js/jquery.js"></script>
+	<script src="../js/materialize.js"></script>
+	<script src="../js/jquerymask.min.js"></script>
+	<script src="../js/mbox-0.0.1.js"></script>
 
-<script>
-	/*Joga tudo no banco de dados*/
-	$('#registrar_usuario').click(function(e) {
-		e.preventDefault();
+	<script>
 
-		var nome_registro = $('#nome_registro').val();
-		var cpf_registro = $('#cpf_registro').val();
-		var email_registro = $('#email_registro').val();
-		var senha_registro = $('#senha_registro').val();
-		var sobrenome_registro = $('#sobrenome_registro').val();
 
-		if(nome_registro == "" || cpf_registro == "" || email_registro == ""|| sobrenome_registro == ""){
-			return mbox.alert('Preencha todos os campos que possuem *');
-		}/*else if(senha_registro.length < 6){
-			return mbox.alert('Cadastre uma senha com mais de 6 digitos!');
-		} */else {
-			$.ajax({
-				url: '../engine/controllers/usuario.php',
-				data : {
-					nome: nome_registro,
-					cpf : cpf_registro,
-					email : email_registro,
-					senha : senha_registro,
-					sobrenome: sobrenome_registro,
-
-					action: 'create'
-				},
-				success: function(data){
-					obj = JSON.parse(data);
-					if(obj.res === 'true'){
-						Materialize.toast("Cadastro Realizado com Sucesso!", 1500, "rounded", function(){
-							window.location = "index.php"                    
-						});
-					}
-				},
-				async: false,
-				type : 'POST'
+		/*Para fazer o select aparecer*/
+		window.onload=function(){
+			$(document).ready(function() {
+				$('select').material_select();
 			});
 		}
-	});  
 
-</script>
+		$('#cpf_registro').mask('999.999.999-99');
+		
+		/*Joga tudo no banco de dados*/
+		$('#registrar_usuario').click(function(e) {
+			e.preventDefault();
+
+			var nome_registro = $('#nome_registro').val();
+			var cpf_registro = $('#cpf_registro').val();
+			var email_registro = $('#email_registro').val();
+			var senha_registro = $('#senha_registro').val();
+			var sobrenome_registro = $('#sobrenome_registro').val();
+
+			if(nome_registro == "" || cpf_registro == "" || email_registro == ""|| sobrenome_registro == "" || senha_registro == ""){
+				return mbox.alert('Preencha todos os campos que possuem *');
+			}else if(senha_registro.length < 6){
+				return mbox.alert('Cadastre uma senha com mais de 6 digitos!');
+			} else {
+				$.ajax({
+					url: '../engine/controllers/usuario.php',
+					data : {
+						nome: nome_registro,
+						cpf : cpf_registro,
+						email : email_registro,
+						senha : senha_registro,
+						sobrenome: sobrenome_registro,
+
+						action: 'create'
+					},
+					success: function(data){
+						obj = JSON.parse(data);
+						if(obj.res === 'true'){
+							Materialize.toast("Cadastro Realizado com Sucesso!", 1500, "rounded", function(){
+								window.location = "../login.php"                    
+							});
+						}
+					},
+					async: false,
+					type : 'POST'
+				});
+			}
+		});  
+
+	</script>

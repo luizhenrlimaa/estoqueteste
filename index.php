@@ -1,4 +1,4 @@
-<      <?php
+<   <?php
     $showerros = true;
     if($showerros) {
       ini_set("display_errors", $showerros);

@@ -92,12 +92,17 @@ session_start();
 
 <script type="text/javascript">
 
- 
-
+  /*Para fazer o select aparecer*/
+  window.onload=function(){
+    $(document).ready(function() {
+      $('select').material_select();
+    });
+  }
   $(document).ready(function(e) {
 
     $('#login_usuario').click(function(e) {
       e.preventDefault();
+
       var email_login = $('#email_login').val();
       var senha_login = $('#senha_login').val();
 
