@@ -5,15 +5,13 @@ require_once "../config.php";
 $id= $_POST['id'];
 $nome= $_POST['nome'];
 $cpf= $_POST['cpf'];
-$email= $_POST['email'];
 $sobrenome= $_POST['sobrenome']; 
 $senha= $_POST['senha'];
-
-
+$email= $_POST['email'];
 $action = $_POST['action'];
 
 $Item = new Usuario();
-$Item->SetValues($id, $nome, $cpf, $email,$sobrenome, password_hash($senha, PASSWORD_DEFAULT));
+$Item->SetValues($id, $nome, $cpf, $sobrenome, password_hash($senha, PASSWORD_DEFAULT),  $email);
 
 switch($action){
 	case 'create':

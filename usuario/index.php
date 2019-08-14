@@ -114,9 +114,10 @@ if($showerros) {
 
 			var nome_registro = $('#nome_registro').val();
 			var cpf_registro = $('#cpf_registro').val();
-			var email_registro = $('#email_registro').val();
-			var senha_registro = $('#senha_registro').val();
 			var sobrenome_registro = $('#sobrenome_registro').val();
+			var senha_registro = $('#senha_registro').val();
+			var email_registro = $('#email_registro').val();
+
 
 			if(nome_registro == "" || cpf_registro == "" || email_registro == ""|| sobrenome_registro == "" || senha_registro == ""){
 				return mbox.alert('Preencha todos os campos que possuem *');
@@ -128,10 +129,9 @@ if($showerros) {
 					data : {
 						nome: nome_registro,
 						cpf : cpf_registro,
-						email : email_registro,
-						senha : senha_registro,
 						sobrenome: sobrenome_registro,
-
+						senha : senha_registro,
+						email : email_registro,
 						action: 'create'
 					},
 					success: function(data){

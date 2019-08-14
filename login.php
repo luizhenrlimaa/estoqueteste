@@ -57,7 +57,7 @@ session_start();
             <div class='row'>
               <div class='input-field col s12'>
                 <input id="senha_login" type="password">
-                <label for="password">Senha</label>
+                <label for="senha_login">Senha</label>
               </div>
               <label style='float: right;'>
                 <a href='login/esqueci_senha.php' style="color: #000; font-size: 13px;"><b>Esqueceu a senha?</b></a>
@@ -76,7 +76,6 @@ session_start();
         </div>
       </div>
     </center>
-
   </main>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
@@ -91,13 +90,7 @@ session_start();
 <script src="js/mbox-0.0.1.js"></script>
 
 <script type="text/javascript">
-
-  /*Para fazer o select aparecer*/
-  window.onload=function(){
-    $(document).ready(function() {
-      $('select').material_select();
-    });
-  }
+ 
   $(document).ready(function(e) {
 
     $('#login_usuario').click(function(e) {

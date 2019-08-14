@@ -1,4 +1,4 @@
-<   <?php
+<?php
     $showerros = true;
     if($showerros) {
       ini_set("display_errors", $showerros);
@@ -29,7 +29,7 @@
       <link rel="stylesheet" type="text/css" href="css/mbox-0.0.1.css"/>
     </head>
     <body>
-      <nav style="background:#2980b9 ;">
+      <nav style="background:#708090 ;">
         <div class="nav-wrapper">
           <ul class="hide-on-med-and-down">
             <li><a href="index.php" class="brand-logo"><i class="material-icons">cloud</i>Estoque</a></li>
