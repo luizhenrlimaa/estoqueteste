@@ -1,4 +1,4 @@
-<    <?php
+<      <?php
     $showerros = true;
     if($showerros) {
       ini_set("display_errors", $showerros);
@@ -47,7 +47,6 @@
             $nome = $teste['nome'];
             
             ?>
-            
             <li><?php echo $nome; ?></li>
           </ul>
           <ul class=" right hide-on-med-and-down">
@@ -112,8 +111,8 @@
 
 
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="../js/materialize.js"></script>
-    <script src="../js/init.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/mbox-0.0.1.js"></script>
 

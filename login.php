@@ -13,7 +13,9 @@ session_start();
 <head>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" type="text/css" href="css/mbox-0.0.1.css"/>
   <style>
     body {
       display: flex;
@@ -85,6 +87,8 @@ session_start();
 
 <script src="js/jquery.js"></script>
 <script src="js/materialize.js"></script>
+<script src="js/jquerymask.min.js"></script>
+<script src="js/mbox-0.0.1.js"></script>
 
 <script type="text/javascript">
 
@@ -94,7 +98,6 @@ session_start();
 
     $('#login_usuario').click(function(e) {
       e.preventDefault();
-
       var email_login = $('#email_login').val();
       var senha_login = $('#senha_login').val();
 
