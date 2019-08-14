@@ -8,13 +8,13 @@ class Usuario{
 	private $sobrenome;
 
 		//setters
-	public function SetValues($id, $nome, $cpf, $email, $senha , $sobrenome){
+	public function SetValues($id, $nome, $cpf, $sobrenome, $senha, $email){
 		$this->id = $id;
 		$this->nome = $nome;
 		$this->cpf = $cpf;
-		$this->email = $email;
-		$this->senha = $senha;
 		$this->sobrenome = $sobrenome;
+		$this->senha = $senha;
+		$this->email = $email;
 	}
 
 	public function Create(){
@@ -24,18 +24,18 @@ class Usuario{
 		id,
 		nome,
 		cpf,
-		email,
+		sobrenome,
 		senha,
-		sobrenome
+		email
 		)
 		VALUES
 		(
 		'$this->id',
 		'$this->nome',
 		'$this->cpf',
-		'$this->email',
+		'$this->sobrenome',
 		'$this->senha',
-		'$this->sobrenome'
+		'$this->email'
 		);
 		";
 
@@ -90,8 +90,9 @@ class Usuario{
 		UPDATE usuario SET
 		nome = '$this->nome',
 		cpf = '$this->cpf',
+		sobrenome = '$this->sobrenome',
 		email = '$this->email'
-		sobrenome = '$this->sobrenome'
+		
 		
 		WHERE id = '$this->id'
 		";
@@ -163,18 +164,18 @@ class Usuario{
 		$this->id;
 		$this->nome;
 		$this->cpf;
-		$this->email;
-		$this->senha;
 		$this->sobrenome;
+		$this->senha;
+		$this->email;
 	}
 
 	function __destruct(){
 		$this->id;
 		$this->nome;
 		$this->cpf;
-		$this->email;
-		$this->senha;
 		$this->sobrenome;
+		$this->senha;
+		$this->email;
 	}
 };
 ?>
