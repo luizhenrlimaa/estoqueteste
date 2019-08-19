@@ -1,4 +1,4 @@
-    <?php
+<?php
     $showerros = true;
     if($showerros) {
       ini_set("display_errors", $showerros);
@@ -34,10 +34,10 @@
     </head>
 
     <body>  
-      <nav style="background: #708090; color: #fff;">
+      <nav style="background:#2980b9 ;">
         <div class="nav-wrapper">
           <ul class="hide-on-med-and-down">
-            <li><a href="../index.php" class="brand-logo"><i class="material-icons">cloud</i>EDITAR</a></li>
+            <li><a href="../index.php" class="brand-logo"><i class="material-icons">cloud</i>Estoque</a></li>
           </ul>
           <ul class="right hide-on-med-and-down getout">
             <li><a href="../engine/controllers/logout.php"><i class="material-icons">arrow_forward</i></a></li>
@@ -49,31 +49,24 @@
         </nav>
         <br>
         <div class="col m12 s12">
-          <a class="waves-effect waves-light btn <?php if($flagUser == 1) echo 'hide' ?>" href="consultar_produto.php" style="color: black; background: white;"><i class="fa fa-arrow-left"></i> Voltar</a>
+          <a class="waves-effect waves-light btn <?php if($flagUser == 1) echo 'hide' ?>" href="consulta_fornecedor.php" style="color: black; background: white;"><i class="fa fa-arrow-left"></i> Voltar</a>
         </div>
 
-        <center><h5 style="font-weight: 600;">Editar Dados do Produto</h5></center>
+        <center><h5 style="font-weight: 600;">Editar Dados do Fornecedor</h5></center>
         <br>
 
         <div class="container">
          <?php require_once "../engine/config.php";
 
          $id = $_GET['id'];
-         $valores = new Produto();
+         $valores = new Fornecedor();
          $valores = $valores->Read($id);
 
          $nome = $valores['nome'];
-         $quantidade = $valores['quantidade'];
-         $custo = $valores['valor'];
-         $fk = $valores['fk_fornecedor'];
-         $cfop = $cfop['fk_cfop'];
-
-         switch ($valores['tipo']) {
-          case '0': $tipo = "Caixa"; break;
-          case '1': $tipo = "Unidade"; break;
-          case '2': $tipo = "Outros"; break;
-        }
-
+         $cnpj = $valores['cnpj'];
+         $email = $valores['email'];
+         $ie = $valores['ie'];
+        
         ?>
 
         <br><br>
@@ -83,57 +76,22 @@
             <label >Nome</label>
           </div>
           <div class="input-field col m6 s12">
-           <input type="text" id="quantidade" name="quantidade" value="<?php echo $quantidade;?>">
-           <label >Quantidade</label>
+           <input type="text" id="cnpj" name="cnpj" value="<?php echo $cnpj;?>">
+           <label >CNPJ</label>
          </div>
        </div>
 
        <div class="row">
-         <div class="input-field col m6 s12">
-          <select name="tipo" id="tipo">
-            <option value="" desabled selected><?php echo $tipo;?></option>
-            <option value="0">Caixa</option>
-            <option value="1">Unidade</option>
-            <option value="2">Outros</option>
-          </select>
-          <label>Tipo</label>
-        </div>
         <div class="input-field col m6 s12">
-         <input type="text" id="valor_produto" name="valor_produto" value="<?php echo $custo;?>">
-         <label >Valor R$</label>
-       </div>
+            <input type="text" id="email" name="email" value="<?php echo $email;?>">
+            <label >Email</label>
+          </div>
+          <div class="input-field col m6 s12">
+           <input type="text" id="ie" name="ie" value="<?php echo $ie;?>">
+           <label >Inscrição Estadual</label>
+         </div>
      </div>
 
-     <div class="row">
-      <div class="input-field col m6 s12">
-        <select name="fornecedor" id="fornecedor">
-          <?php
-          require_once "../engine/config.php";
-          $info = new Fornecedor();
-          $info = $info->ReadSelect();
-
-          $info = new Fornecedor();
-          $info = $info->ReadAll();
-          ?>
-          <option value="" desabled selected>Selecione...</option>
-          <?php
-          foreach ($info as $todos){ 
-            ?>
-
-            <option value="<?php echo $todos['id'];?>" <?php if($todos['id'] == $fk){echo 'selected';} ?>><?php echo  $todos['nome'];?></option>';
-
-          <?php }
-          ?>
-        </select>
-        <label>Fornecedor</label>
-
-      </div>
-
-      <div class="input-field col m6 s12">
-            <input type="text" id="cfop" name="cfop" value="<?php echo $cfop;?>">
-            <label >CFOP</label>
-          </div>
-    </div>
     <br>
     <div class="input-field col m12 s12">
       <p class="center"><a class="waves-effect waves-light btn green darken-3" id="Salvar"><i class="fa fa-pencil"></i> Salvar Alterações </a></p>
@@ -176,40 +134,31 @@
     e.preventDefault();
     var id = '<?php echo  $_GET['id'];?>';
     var nome = $('#nome').val();
-    var quantidade = $('#quantidade').val();
-    var tipo = $('#tipo').val();
-    var fornecedor = $('#fornecedor').val();
-    var valor_produto = $('#valor_produto').val();
-    var cfop = $('#cfop').val();
+    var cnpj = $('#cnpj').val();
+    var email = $('#email').val();
+    var ie = $('#ie').val();
 
-    switch (tipo) {
-      case 'Caixa': tipo = 0;
-      case 'Unidade': tipo = 1;
-      case 'Outros': tipo = 2;
-    }
 
-    if (nome === "" && quantidade === "" && tipo === ""&& valor_produto ===""&& fornecedor=== "" && cfop=== ""){
+    if (nome === "" && cnpj === "" && email === ""&& ie === ""){
       var $toastContent = $('<span>Preencha pelo menos um campo!</span>');
       Materialize.toast($toastContent, 4000, 'rounded');
       return;
     }else{
       $.ajax({
-        url: '../engine/controllers/produto.php',
+        url: '../engine/controllers/fornecedor.php',
         data: {
           id : id,
           nome : nome,
-          quantidade : quantidade,
-          tipo : tipo,
-          valor: valor_produto,
-          fk_fornecedor: fornecedor,
-          fk_cfop: cfop,
+          cnpj : cnpj,
+          email : email,
+          ie: ie,
 
           action: 'update'
         },
         success: function(data) {
           if(data === 'true'){
             Materialize.toast("Dados Atualizados.", 3000, "rounded", function(){
-              window.location.href = "consultar_produto.php";
+              window.location.href = "consulta_fornecedor.php";
             });
           }else{
             var $toastContent = $('<span>Erro ao conectar com banco de dados. Aguarde e tente novamente em alguns instantes.</span>');

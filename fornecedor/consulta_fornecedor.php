@@ -51,7 +51,7 @@
       <nav style="background:#708090 ;">
         <div class="nav-wrapper">
           <ul class="hide-on-med-and-down">
-            <li><a href="../index.php" class="brand-logo"><i class="material-icons">cloud</i>Estoque</a></li>
+            <li><a href="../index.php" class="brand-logo"><i class="material-icons">cloud</i>CONSULTAR FORNECEDOR</a></li>
           </ul>
           <ul class="right hide-on-med-and-down getout">
             <li><a href="../engine/controllers/logout.php"><i class="material-icons">arrow_forward</i></a></li>
@@ -92,7 +92,7 @@
             </form>
           </div>
           <table class="responsive-table centered">
-            <thead style="background: #2980b9; color: #fff;">
+            <thead style="background: #708090; color: #fff;">
               <tr>
                 <th>Nome</th>
                 <th>CNPJ</th>

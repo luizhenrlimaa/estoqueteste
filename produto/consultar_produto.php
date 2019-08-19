@@ -148,7 +148,7 @@
           }else{
             ?>
             <table class="responsive-table centered">
-              <thead style="background: #2980b9; color: #fff;">
+              <thead style="background: #708090; color: #fff;">
                 <tr>
                   <th>Nome</th>
                   <th>Quantidade</th>
