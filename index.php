@@ -99,7 +99,8 @@
                 <p>Entre em contato para mais informações.</p>
               </div>
               <div class="card-action">
-                <a href="contato.php">ENTRAR</a>
+                <a href="contato.php">REALIZAR</a>
+                <a href="contato/consultar_contato.php">CONSULTAR REGISTROS</a>
               </div>
             </div>
           </div>

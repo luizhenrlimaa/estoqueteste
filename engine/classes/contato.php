@@ -101,6 +101,20 @@ class Contato{
 		return $result;
 	}
 
+	public function ReadAll_Paginacao($inicio, $registros) {
+		$sql = "
+		SELECT * FROM contato LIMIT $inicio, $registros
+		";
+
+		$DB = new DB();
+		$DB->open();
+		$Data = $DB->fetchData($sql);
+
+		$DB->close();
+		return $Data;
+	}
+
+
 	
 
 	public function Delete(){
