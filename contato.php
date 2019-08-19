@@ -158,7 +158,7 @@ if(empty($_SESSION)){
             if(obj.res === 'true'){
               Materialize.toast("Contato enviado com Sucesso!", 1500, "rounded", function(){
                
-                window.location = "index.php"                    
+                window.location = "contato/consultar_contato.php"                    
               });
             }
           },

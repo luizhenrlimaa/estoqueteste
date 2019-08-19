@@ -1,4 +1,4 @@
-    <?php
+<?php
     $showerros = true;
     if($showerros) {
       ini_set("display_errors", $showerros);
@@ -51,45 +51,46 @@
       <nav style="background:#708090;">
         <div class="nav-wrapper">
           <ul class="hide-on-med-and-down">
-            <li><a href="../index.php" class="brand-logo"><i class="material-icons">cloud</i>CONSULTAR PRODUTO</a></li>
+            <li><a href="../index.php" class="brand-logo"><i class="material-icons">cloud</i>CONSULTAR REGISTROS DE CONTATO</a></li>
           </ul>
           <ul class="right hide-on-med-and-down getout">
             <li><a href="../engine/controllers/logout.php"><i class="material-icons">arrow_forward</i></a></li>
           </ul>
           <ul class=" right hide-on-med-and-down">
-            <li><a href="usuario/editar.php"><i class="large material-icons">account_circle</i></a>
+            <li><a href="../usuario/editar.php"><i class="large material-icons">account_circle</i></a>
             </ul>
           </div>
         </nav>
         <br>
         <div class="col m12 s12">
           <a class="waves-effect waves-light btn <?php if($flagUser == 1) echo 'hide' ?>" href="../index.php" style="color: black; background: white;"><i class="fa fa-arrow-left"></i> Voltar</a>
-          <a class="waves-effect waves-light btn <?php if($flagUser == 1) echo 'hide' ?>" href="inserir_produto.php" style="color: black; background: #27ae60;"><i class="fas fa-plus"></i> Adicionar</a>
+          <a class="waves-effect waves-light btn <?php if($flagUser == 1) echo 'hide' ?>" href="../contato.php" style="color: black; background: #27ae60;"><i class="fas fa-plus"></i> Adicionar</a>
         </div>
         
+           
         <?php
         require_once "../engine/config.php";
 
         $item_por_pag = 10;
 
-        $x = new Produto();
-        $ProdutoNum = 0;
+        $x = new Contato();
+        $ContatoNum = 0;
         $x = $x->ReadAll();
         foreach($x as $xx){
-          $ProdutoNum += 1;
+          $ContatoNum += 1;
         }
         $pagina = intval($_GET['pagina']);
-        $num_paginas = ceil($ProdutoNum/$item_por_pag);
+        $num_paginas = ceil($ContatoNum/$item_por_pag);
 
         $item = 0;
         for($a = 0; $a<$pagina; $a++){
           $item = $item+$item_por_pag;
         }
 
-        $Produto = new Produto();
-        $Produto = $Produto->ReadAll_Paginacao($item, $item_por_pag);
-
+        $Contato = new Contato();
+        $Contato = $Contato->ReadAll_Paginacao($item, $item_por_pag);
         ?>
+
 
         <div class="container-fluid" style="min-height: 100vh;">
           <div class="row">
@@ -100,24 +101,16 @@
               <div class="input-field col m2 s4">
                 <select id="tipo" name="tipo">
                   <option value="0">Nome</option>
-                  <option value="1">Quantidade</option>
-                  <option value="2">Tipo</option>
-                  <option value="3">Valor</option>
-                  <option value="4">Fornecedor</option>
-                  <option value="5">CFOP</option>
+                  <option value="1">Assunto</option>
+                  <option value="2">Sobrenome</option>
+                  <option value="3">Texto</option>
+                 
                 </select> 
               </div>
               <div class="input-field col m2 s5" id="solici_aberto">
                 <input placeholder="Pesquisar por..." id="pesq_nome" name="pesq_nome" type="text">
               </div>
 
-              <div class="input-field col m2 s5 hide" id="tipo_select">
-                <select id="tipo_pesq" name="tipo_pesq">
-                  <option value="0">Caixa</option>
-                  <option value="1">Unidade</option>
-                  <option value="2">Outros</option>
-                </select>
-              </div>
 
               <div class="input-field col m2 s5 hide" id="fornecedor_select">
                 <select id="fornecedor_pesq" name="fornecedor_pesq">
@@ -143,7 +136,7 @@
             </form>
           </div>
           <?php
-          if(empty($Produto)){
+          if(empty($Contato)){
             echo '<h4 class="center"> Nenhum dado encontrado! </h4>';
           }else{
             ?>
@@ -151,50 +144,37 @@
               <thead style="background: #708090; color: #fff;">
                 <tr>
                   <th>Nome</th>
-                  <th>Quantidade</th>
-                  <th>Tipo</th>
-                  <th>Valor R$</th>
-                  <th>Fornecedor</th>
-                  <th>CFOP</th>
-                  <th>Apagar</th>
+                  <th>Assunto</th>
+                  <th>Sobrenome</th>
+                  <th>Texto</th>
+                  <th>Apagar<th>
+                  
                 </tr>
               </thead>
               <tbody>
                 <?php 
 
-                foreach($Produto as $val) {
+                foreach($Contato as $val) {
 
                   $id = $val['id'];
-                  $nome_produto = $val['nome'];
-                  $quantidade = $val['quantidade'];
-                  $custo = $val['valor'];
-                  $cfop = $val['cfop'];
-
-                  switch ($val['tipo']) {
-                    case '0': $tipo_produto = "Caixa"; break;
-                    case '1': $tipo_produto = "Unidade"; break;
-                    case '2': $tipo_produto = "Outros"; break;
-                  }
-
-                  $valor = new Fornecedor();
-                  $valor = $valor->Read($val['fk_fornecedor']);
-                  $Fornecedor = $valor['nome'];
+                  $nome = $val['nome'];
+                  $assunto = $val['assunto'];
+                  $sobrenome = $val['sobrenome'];
+                  $area = $val['area'];
                   ?>
 
                   <tr class="detalhes_usuario">
-                    <td class="det" id="<?php echo $val['id']; ?>"><?php echo $nome_produto;?></td>
-                    <td class="det" id="<?php echo $val['id']; ?>"><?php echo $quantidade;?></td>
-                    <td class="det" id="<?php echo $val['id']; ?>"><?php echo $tipo_produto;?></td>
-                    <td class="det" id="<?php echo $val['id']; ?>">R$ <?php echo $custo;?>,00</td>
-                    <td class="det" id="<?php echo $val['id']; ?>"><?php echo $Fornecedor; ?></td>
-                    <td class="det" id="<?php echo $val['id']; ?>"><?php echo $cfop; ?></td>
+                    <td class="det" id="<?php echo $val['id']; ?>"><?php echo $nome;?></td>
+                    <td class="det" id="<?php echo $val['id']; ?>"><?php echo $assunto;?></td>
+                    <td class="det" id="<?php echo $val['id']; ?>"><?php echo $sobrenome;?></td>
+                    <td class="det" id="<?php echo $val['id']; ?>"><?php echo $area;?></td>
                     <td class="apagar" id="<?php echo $val['id']; ?>"><i class="fa fa-trash fa-lg"></i> </td>
                   </tr>
                 <?php }?>
               </tbody>
             </table>
             <ul class="pagination">
-              <li><a href="consultar_produto.php?pagina=0"><i class="material-icons">chevron_left</i></a></li>
+              <li><a href="consultar_contato.php?pagina=0"><i class="material-icons">chevron_left</i></a></li>
 
               <?php
               $lim_links = 5;
@@ -208,15 +188,15 @@
 
                   if($i == $pagina){ ?>
                     <li><a style="text-transform: uppercase;font-weight: 700; background: #3574B9; color: white;" 
-                      href="consultar_produto.php?pagina=<?php echo $i; ?>"><?php echo $i+1; ?></a></li>
+                      href="consultar_contato.php?pagina=<?php echo $i; ?>"><?php echo $i+1; ?></a></li>
                     <?php }else { ?>
-                      <li><a style="text-transform: uppercase;font-weight: 700; color: #3574B9;" href="consultar_produto.php?pagina=<?php echo $i; ?>"><?php echo $i+1; ?></a></li>
+                      <li><a style="text-transform: uppercase;font-weight: 700; color: #3574B9;" href="consultar_contato.php?pagina=<?php echo $i; ?>"><?php echo $i+1; ?></a></li>
                       <?php 
                     }
                   } if($pagina < $num_paginas-$lim_links-1){echo "<li style='text-transform: uppercase;font-weight: 700; color: #222; font-size: 1.2em;'>. . .</li>";}
                 }
                 ?>
-                <li class="waves-effect"><a href="consultar_produto.php?pagina=<?php echo $num_paginas-1 ?>"><i class="material-icons">chevron_right</i></a></li>
+                <li class="waves-effect"><a href="consultar_contato.php?pagina=<?php echo $num_paginas-1 ?>"><i class="material-icons">chevron_right</i></a></li>
               </ul>
             <?php } ?>
           </div>
@@ -235,7 +215,7 @@
 
             $('.det').click(function(e) {
               var id = $(this).attr('id');
-              window.location = "edita_produto.php?id="+id;
+              window.location = "edita_contato.php?id="+id;
             });
 
             $('.getout').click(function(e) {
@@ -255,12 +235,12 @@
               });
             });
 
-          $(".apagar").click( function(event) {
+           $(".apagar").click( function(event) {
             var apagar = confirm('Deseja realmente excluir este registro?');
             if (apagar){
               var id = $(this).attr('id');
               $.ajax({
-                url: '../engine/controllers/produto.php',
+                url: '../engine/controllers/contato.php',
                 data: {
                   fk_fornecedor : id,
                   action: 'update_fornecedor'
@@ -270,7 +250,7 @@
                 type: 'POST'
               });
               $.ajax({
-                url: '../engine/controllers/produto.php',
+                url: '../engine/controllers/contato.php',
                 data: {
                   id : id,
                   action: 'delete'
@@ -293,7 +273,7 @@
             $("#tipo").change(function(){
               var tipo = $('#tipo').val();
 
-              if(tipo == 0){
+             if(tipo == 0){
                 $("#solici_aberto").removeClass("hide");
                 $("#tipo_select").addClass("hide");
                 $("#fornecedor_select").addClass("hide");
@@ -329,23 +309,17 @@
                 if(pesq == ""){
                   return toastr.error('Preencha o campo de pesquisa!');
                 }else{
-                  window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
+                  window.location = "consultar_contato_resultado.php?pesq="+pesq+"&tipo="+tipo;
                 }
               }else if(tipo == 1){
                 var pesq = $('#pesq_nome').val();
-                window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
+                window.location = "consultar_contato_resultado.php?pesq="+pesq+"&tipo="+tipo;
               }else if(tipo == 2){
                 var pesq = $('#tipo_pesq').val();
-                window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
+                window.location = "consultar_contato_resultado.php?pesq="+pesq+"&tipo="+tipo;
               }else if(tipo==3){
                 var pesq = $('#pesq_nome').val();
-                window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
-              }else if(tipo == 4){
-                var pesq = $('#fornecedor_pesq').val();
-                window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
-              }else if(tipo == 5){
-                var pesq = $('#fornecedor_pesq').val();
-                window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
+                window.location = "consultar_contato_resultado.php?pesq="+pesq+"&tipo="+tipo;
               }
 
             });
