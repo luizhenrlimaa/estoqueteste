@@ -9,6 +9,5 @@ require_once "bd/bd.php";
 require_once "classes/usuario.php";
 require_once "classes/produto.php";
 require_once "classes/fornecedor.php";
-
-
+require_once "classes/contato.php";
 ?>

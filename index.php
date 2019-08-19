@@ -32,7 +32,7 @@
       <nav style="background:#708090 ;">
         <div class="nav-wrapper">
           <ul class="hide-on-med-and-down">
-            <li><a href="index.php" class="brand-logo"><i class="material-icons">cloud</i>Estoque</a></li>
+            <li><a href="index.php" class="brand-logo"><i class="material-icons">cloud</i>GESTÃO DE ESTOQUE</a></li>
           </ul>
           <ul class="right hide-on-med-and-down getout">
             <li><a href="../engine/controllers/logout.php"><i class="material-icons">arrow_forward</i></a></li>
@@ -60,7 +60,7 @@
           <div class="col s12 m6">
             <div class="card blue-grey darken-1">
               <div class="card-content white-text">
-                <span class="card-title">Produto</span>
+                <span class="card-title">PRODUTO</span>
                 <p>Consulte no sistema os produtos que você possui.</p>
               </div>
               <div class="card-action">
@@ -71,7 +71,7 @@
           <div class="col s12 m6">
             <div class="card blue-grey darken-1">
               <div class="card-content white-text">
-                <span class="card-title">Fornecedor</span>
+                <span class="card-title">FORNECEDOR</span>
                 <p>Consulte no sistema os seus fornecedores.</p>
               </div>
               <div class="card-action">
@@ -84,7 +84,7 @@
           <div class="col s12 m6">
             <div class="card blue-grey darken-1">
               <div class="card-content white-text">
-                <span class="card-title">Gerar relatório</span>
+                <span class="card-title">GERAR RELATÓRIO PDF</span>
                 <p>Gere o relatório do estoque.</p>
               </div>
               <div class="card-action">
@@ -95,11 +95,11 @@
           <div class="col s12 m6">
             <div class="card blue-grey darken-1">
               <div class="card-content white-text">
-                <span class="card-title">Preencher</span>
-                <p>Procurar algo para preencher.</p>
+                <span class="card-title">CONTATO</span>
+                <p>Entre em contato para mais informações.</p>
               </div>
               <div class="card-action">
-                <a href="#">Preencher</a>
+                <a href="contato.php">ENTRAR</a>
               </div>
             </div>
           </div>
