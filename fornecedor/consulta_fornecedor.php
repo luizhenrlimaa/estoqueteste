@@ -73,7 +73,7 @@
             <form class="col s12">
               <div class="col m7 s12"></div>
               <div class="input-field col m2 s4">
-                <select id="tipo" name="tipo">
+                <select onchange="teste()" id="tipo" name="tipo">
                   <option value="0">Nome</option>
                   <option value="1">CNPJ</option>
                   <option value="2">E-mail</option>
@@ -82,8 +82,20 @@
                 </select> 
               </div>
 
-              <div class="input-field col m2 s5" id="solici_aberto">
-                <input placeholder="Pesquisar por..." id="pesq_nome" name="pesq_nome" type="text">
+              <div class="input-field col m2 s5 " id="nome">
+                <input placeholder="Nome" id="pesq_nome" name="pesq_nome" type="text">
+              </div>
+
+              <div class="input-field col m2 s5 hide" id="cnpj">
+                <input placeholder="CNPJ" id="pesq_nome" name="pesq_nome" type="text">
+              </div>
+
+              <div class="input-field col m2 s5 hide" id="email">
+                <input placeholder="E-mail" id="pesq_nome" name="pesq_nome" type="text">
+              </div>
+
+              <div class="input-field col m2 s5 hide" id="ie">
+                <input placeholder="Inscrição Estadual" id="pesq_nome" name="pesq_nome" type="text">
               </div>
 
               <div class="input-field col m1 s1">
@@ -97,7 +109,7 @@
                 <th>Nome</th>
                 <th>CNPJ</th>
                 <th>E-mail</th>
-                 <th>I.E.</th>
+                <th>I.E.</th>
                 <th>Apagar</th>
               </tr>
             </thead>
@@ -120,7 +132,7 @@
                   <td class="det" id="<?php echo $val['id']; ?>"><?php echo $nome;?></td>
                   <td class="det" id="<?php echo $val['id']; ?>"><?php echo $cnpj;?></td>
                   <td class="det" id="<?php echo $val['id']; ?>"><?php echo $email;?></td>
-                   <td class="det" id="<?php echo $val['id']; ?>"><?php echo $ie;?></td>
+                  <td class="det" id="<?php echo $val['id']; ?>"><?php echo $ie;?></td>
                   <td class="apagar" id="<?php echo $val['id']; ?>"><i class="fa fa-trash fa-lg"></i> </td>
                 </tr>
               <?php }?>
@@ -136,95 +148,122 @@
       <script src="../js/drop_materialize.js"></script>
 
       <script>
-        $(document).ready(function(){
+       
 
 
-          $('.det').click(function(e) {
+       function teste(){
+        var tipo = $('#tipo').val();
+        if(tipo == 0){
+          $("#nome").removeClass("hide");
+          $("#cnpj").addClass("hide");
+          $("#email").addClass("hide");
+          $('#ie').addClass("hide");
+        }else if(tipo == 1){
+          $("#nome").addClass("hide");
+          $("#cnpj").removeClass("hide");
+          $("#email").addClass("hide");
+          $('#ie').addClass("hide");
+        }else if(tipo == 2){
+          $("#nome").addClass("hide");
+          $("#cnpj").addClass("hide");
+          $("#email").removeClass("hide");
+          $('#ie').addClass("hide");
+        } else if(tipo == 3){
+          $("#nome").addClass("hide");
+          $("#cnpj").addClass("hide");
+          $("#email").addClass("hide");
+          $('#ie').removeClass("hide");
+        }
+
+      };
+
+
+
+
+
+
+
+      $(document).ready(function(){
+
+
+        $('.det').click(function(e) {
+          var id = $(this).attr('id');
+          window.location = "edita_fornecedor.php?id="+id;
+        });
+
+        $('.getout').click(function(e) {
+          e.preventDefault();
+
+          $.ajax({
+            url: '../engine/controllers/logout.php',
+            data: {},
+            success: function(data) {
+              if(data === 'kickme'){
+                document.location.href = '../login.php';
+              } else {
+                return mbox.alert('Erro ao conectar com banco de dados. Aguarde e tente novamente em alguns instantes.');
+              }
+            },
+            type: 'POST'
+          });
+        });
+
+
+        $(".apagar").click( function(event) {
+          var apagar = confirm('Deseja realmente excluir este registro?');
+          if (apagar){
             var id = $(this).attr('id');
-            window.location = "#";
-          });
-
-          $('.getout').click(function(e) {
-            e.preventDefault();
-
             $.ajax({
-              url: '../engine/controllers/logout.php',
-              data: {},
-              success: function(data) {
-                if(data === 'kickme'){
-                  document.location.href = '../login.php';
-                } else {
-                  alert('Erro ao conectar com banco de dados. Aguarde e tente novamente em alguns instantes.');
-                }
+              url: '../engine/controllers/produto.php',
+              data: {
+                fk_fornecedor : id,
+                action: 'update_fornecedor'
               },
-              type: 'POST'
-            });
-          });
-
-          $(".apagar").click( function(event) {
-            var apagar = confirm('Deseja realmente excluir este registro?');
-            if (apagar){
-              var id = $(this).attr('id');
-              $.ajax({
-                url: '../engine/controllers/produto.php',
-                data: {
-                  fk_fornecedor : id,
-                  action: 'update_fornecedor'
-                },
                 //garante que seja executado na sequencia
                 async: false,
                 type: 'POST'
               });
-              $.ajax({
-                url: '../engine/controllers/fornecedor.php',
-                data: {
-                  id : id,
-                  action: 'delete'
-                },
-                success: function(data) {
-                  if(data === 'true'){
-                    Materialize.toast("Solicitação excluida.", 3000, "rounded", function(){
-                      location.reload();
-                    });
-                  }
-                },
-                async: false,
-                type: 'POST'
-              });      
-            }else{
-             event.preventDefault();
-           } 
-         });
+            $.ajax({
+              url: '../engine/controllers/produto.php',
+              data: {
+                id : id,
+                action: 'delete'
+              },
+              success: function(data) {
+                if(data === 'true'){
+                  Materialize.toast("Solicitação excluida.", 3000, "rounded", function(){
+                    location.reload();
+                  });
+                }
+              },
+              async: false,
+              type: 'POST'
+            });      
+          }else{
+           event.preventDefault();
+         } 
+       });
 
-          $("#tipo").change(function(){
-              var tipo = $('#tipo').val();
-              if(tipo == 0){
-                $("#solici_aberto").removeClass("hide");
-              }else if(tipo == 1){
-                $("#solici_aberto").removeClass("hide");
-              }else if(tipo == 2){
-                $("#solici_aberto").romoveClass("hide");
-              }
-            });
-         
-          $('#pesquisar').click(function(e) {
-            e.preventDefault();
-            var tipo = $('#tipo').val();
-            if (tipo == 0){
-              var pesq = $('#pesq_nome').val();
-              if(pesq == ""){
-                return toastr.error('Preencha o campo de pesquisa!');
-              }else{
-                window.location = "consulta_fornecedor_resultado.php?pesq="+pesq+"&tipo="+tipo;
-              }
-            }else if(tipo == 1){
-              var pesq = $('#pesq_nome').val();
-              window.location = "consulta_fornecedor_resultado.php?pesq="+pesq+"&tipo="+tipo;
-            }else if(tipo == 2){
-              var pesq = $('#pesq_nome').val();
+
+
+        $('#pesquisar').click(function(e) {
+          e.preventDefault();
+          var tipo = $('#tipo').val();
+          if (tipo == 0){
+            var pesq = $('#pesq_nome').val();
+            if(pesq == ""){
+              return toastr.error('Preencha o campo de pesquisa!');
+            }else{
               window.location = "consulta_fornecedor_resultado.php?pesq="+pesq+"&tipo="+tipo;
             }
-          });          
+          }else if(tipo == 1){
+            var pesq = $('#pesq_nome').val();
+            window.location = "consulta_fornecedor_resultado.php?pesq="+pesq+"&tipo="+tipo;
+          }else if(tipo == 2){
+            var pesq = $('#pesq_nome').val();
+            window.location = "consulta_fornecedor_resultado.php?pesq="+pesq+"&tipo="+tipo;
+          }
+        });          
 
-        });
-      </script>
+      });
+    </script>
