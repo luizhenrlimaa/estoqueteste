@@ -93,7 +93,7 @@ if(empty($_SESSION)){
 
    <br>
    <div class="input-field col m12 s12">
-    <p class="center"><a class="waves-effect waves-light btn green darken-3" id="Salvar"><i class="fa fa-pencil"></i>Salvar Alterações</a></p>
+    <p class="center"><a class="waves-effect waves-light btn green darken-3" id="Salvar"><i class="fa fa-pencil"></i> Salvar Alterações </a></p>
   </div> 
 </div>
 </body>
@@ -138,7 +138,7 @@ if(empty($_SESSION)){
     var ie = $('#ie').val();
 
 
-    if (nome === "" && cnpj === "" && email === "" && ie ===""){
+    if (nome === "" && cnpj === "" && email === ""&& ie ===""){
       var $toastContent = $('<span>Preencha pelo menos um campo!</span>');
       Materialize.toast($toastContent, 4000, 'rounded');
       return;
