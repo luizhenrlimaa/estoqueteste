@@ -46,6 +46,30 @@ class Contato{
 		return json_encode($result);
 	}
 
+		public function Pesq($id, $pesq, $tipo) {
+		$sql = "
+		SELECT * FROM contato AS t2
+		WHERE $tipo LIKE '%$pesq%'
+		";
+
+		$DB = new DB();
+		$DB->open();
+		$Data = $DB->fetchData($sql);
+		$realData;
+		if($Data ==NULL){
+			$realData = $Data;
+		}else{
+			foreach($Data as $itemData){
+				if(is_bool($itemData)) continue;
+				else{
+					$realData[] = $itemData;
+				}
+			}
+		}
+		$DB->close();
+		return $realData;
+	}
+
 	public function Read($id) {
 		$sql = "
 		SELECT * FROM contato WHERE id  = '$id'
@@ -59,9 +83,11 @@ class Contato{
 		return $Data[0];
 	}
 
-	public function ReadAll(){
-		$sql = "SELECT * FROM contato";
 
+
+	public function ReadAll(){
+		$sql = "SELECT *FROM contato";
+		
 		$DB = new DB();
 		$DB->open();
 		$Data = $DB->fetchData($sql);
@@ -81,7 +107,61 @@ class Contato{
 		return $realData;
 	}
 
-	
+
+
+	public function ReadAll_FK($id) {
+		$sql = "
+		SELECT *
+		FROM
+		contato
+		where fk_usuario = '$id' 
+		";
+
+		$DB = new DB();
+		$DB->open();
+		$Data = $DB->fetchData($sql);
+		$realData;
+		if($Data ==NULL){
+			$realData = $Data;
+		}
+		else{
+
+			foreach($Data as $itemData){
+				if(is_bool($itemData)) continue;
+				else{
+					$realData[] = $itemData;	
+				}
+			}
+		}
+		$DB->close();
+		return $realData; 
+	}
+
+	public function ReadSelect(){
+		$sql = "SELECT * FROM contato
+		";
+
+		$DB = new DB();
+		$DB->open();
+		$Data = $DB->fetchData($sql);
+		$realData;
+		if($Data ==NULL){
+			$realData = $Data;
+		}
+		else{
+			
+			foreach($Data as $itemData){
+				if(is_bool($itemData)) continue;
+				else{
+					$realData[] = $itemData;	
+				}
+			}
+		}
+		$DB->close();
+		return $realData; 
+	}
+
+
 	public function Update(){
 		$sql = "
 		UPDATE contato SET
@@ -89,7 +169,6 @@ class Contato{
 		assunto = '$this->assunto',
 		sobrenome = '$this->sobrenome',
 		area = '$this->area'
-		
 		
 		WHERE id = '$this->id'
 		";
@@ -114,10 +193,7 @@ class Contato{
 		return $Data;
 	}
 
-
-	
-
-	public function Delete(){
+		public function Delete(){
 		$sql = "
 		DELETE FROM contato	WHERE id = '$this->id'
 		";
@@ -128,6 +204,7 @@ class Contato{
 		$DB->close();
 		return $result;
 	}
+
 
 	function __construct(){
 		$this->id;

@@ -304,9 +304,9 @@
                 $("#tipo_select").addClass("hide");
                 $("#fornecedor_select").removeClass("hide");
               }else if (tipo == 5){
-                $("#solici_aberto").addClass("hide");
+                $("#solici_aberto").removeClass("hide");
                 $("#tipo_select").addClass("hide");
-                $("#fornecedor_select").removeClass("hide");
+                $("#fornecedor_select").addClass("hide");
               }
             });
 

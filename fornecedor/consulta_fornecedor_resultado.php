@@ -49,7 +49,7 @@
       </style>
     </head>
     <body>
-      <nav style="background:#2980b9 ;">
+      <nav style="background:#708090;">
         <div class="nav-wrapper">
           <ul class="hide-on-med-and-down">
             <li><a href="../index.php" class="brand-logo"><i class="material-icons">cloud</i>Estoque</a></li>
@@ -112,7 +112,7 @@
             ?>
 
             <table class="responsive-table centered">
-              <thead style="background: #2980b9; color: #fff;">
+              <thead style="background: #708090; color: #fff;">
                 <tr>
                   <th>Nome</th>
                   <th>CNPJ</th>

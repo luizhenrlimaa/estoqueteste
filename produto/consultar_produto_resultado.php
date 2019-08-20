@@ -49,7 +49,7 @@
       </style>
     </head>
     <body>
-      <nav style="background:#2980b9 ;">
+      <nav style="background:#708090;">
         <div class="nav-wrapper">
           <ul class="hide-on-med-and-down">
             <li><a href="../index.php" class="brand-logo"><i class="material-icons">cloud</i>Estoque</a></li>
@@ -80,6 +80,7 @@
                   <option value="2">Tipo</option>
                   <option value="3">Valor</option>
                   <option value="4">Fornecedor</option>
+                  <option value="5">CFOP</option>
                 </select> 
               </div>
 
@@ -137,6 +138,9 @@
           }else if($tipo == 4){
             $tipo = 't2.fk_fornecedor';
           }
+          else if($tipo == 5){
+            $tipo = 't2.cfop';
+          }
 
           $x = new Produto();
           $ProdutoNum = 0;
@@ -163,13 +167,14 @@
             ?>
 
             <table class="responsive-table centered">
-              <thead style="background: #2980b9; color: #fff;">
+              <thead style="background: #708090; color: #fff;">
                 <tr>
                   <th>Nome</th>
                   <th>Quantidade</th>
                   <th>Tipo</th>
                   <th>Valor R$</th>
                   <th>Fornecedor</th>
+                  <th>CFOP</th>
                   <th>Apagar</th>
                 </tr>
               </thead>
@@ -201,6 +206,7 @@
                     <td class="det" id="<?php echo $val['id']; ?>"><?php echo $tipo_produto;?></td>
                     <td class="det" id="<?php echo $val['id']; ?>"><?php echo "R$ ", $custo, ",00";?></td>
                     <td class="det" id="<?php echo $val['id']; ?>"><?php echo $fornecedor;?></td>
+                    <td class="det" id="<?php echo $val['id']; ?>"><?php echo $cfop;?></td>
                     <td class="apagar" id="<?php echo $val['id']; ?>"><i class="fa fa-trash fa-lg"></i> </td>
                   </tr>
                 <?php } ?>
@@ -316,6 +322,10 @@
                 $("#solici_aberto").addClass("hide");
                 $("#tipo_select").addClass("hide");
                 $("#fornecedor_select").removeClass("hide");
+              }else if (tipo == 5){
+                $("#solici_aberto").removeClass("hide");
+                $("#tipo_select").addClass("hide");
+                $("#fornecedor_select").addClass("hide");
               }
             });
 
@@ -341,6 +351,9 @@
                 window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
               }else if(tipo == 4){
                 var pesq = $('#fornecedor_pesq').val();
+                window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
+              }else if(tipo==5){
+                var pesq = $('#pesq_nome').val();
                 window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
               }
             });

@@ -49,7 +49,7 @@
       </style>
     </head>
     <body>
-      <nav style="background:#2980b9 ;">
+      <nav style="background:#708090;">
         <div class="nav-wrapper">
           <ul class="hide-on-med-and-down">
             <li><a href="../index.php" class="brand-logo"><i class="material-icons">cloud</i>Estoque</a></li>
@@ -115,8 +115,6 @@
 
           <?php
           require_once "../engine/config.php";
-          $item_por_pag = 5;
-
           $pesq = $_GET['pesq'];
           $tipo = $_GET['tipo'];
 
@@ -130,37 +128,22 @@
             $tipo = 't2.area';
           }
 
-          $x = new Contato();
-          $Contato = 0;
-          $x = $x->ReadAll();
-          foreach($x as $xx){
-            $Contato += 1;
-          }
-          $pagina = intval($_GET['pagina']);
-          $num_paginas = ceil($Contato/$item_por_pag);
-
-
-          $item = 0;
-          for($a = 0; $a<$pagina; $a++){
-            $item = $item+$item_por_pag;
-          }
-
           $info = new Contato();
-          $info = $info->Pesq_pag($_SESSION['id'], $item, $item_por_pag, $tipo, $pesq);
+          $info = $info->Pesq($_SESSION['id'], $pesq, $tipo);
 
           if(empty($info)){
-
             echo '<center><h4>Nenhum dado encontrado!</h4></center>';
           }else{
             ?>
 
             <table class="responsive-table centered">
-              <thead style="background: #2980b9; color: #fff;">
+              <thead style="background: #708090; color: #fff;">
                 <tr>
                   <th>Nome</th>
                   <th>Assunto</th>
                   <th>Sobrenome</th>
-                  <th>Texto</th>
+                  <th>Texto</th>]
+                  <th>Apagar</th>
                 </tr>
               </thead>
               <tbody>
@@ -175,7 +158,7 @@
 
                   $sobrenome = $val['sobrenome'];
 
-                  $texto = $val['texto'];
+                  $area = $val['area'];
 
 
               
@@ -304,7 +287,8 @@
             });
 
 
-            $('#pesquisar').click(function(e) {
+             $('#pesquisar' ).click(function(e) {
+             
               e.preventDefault();
               var tipo = $('#tipo').val();
               if (tipo == 0){
@@ -312,22 +296,16 @@
                 if(pesq == ""){
                   return toastr.error('Preencha o campo de pesquisa!');
                 }else{
-                  window.location = "consultar_contato_resultado.php?pesq="+pesq+"&tipo="+tipo;
+                  window.location = "consulta_contato_resultado.php?pesq="+pesq+"&tipo="+tipo;
                 }
               }else if(tipo == 1){
                 var pesq = $('#pesq_nome').val();
-                window.location = "consultar_contato_resultado.php?pesq="+pesq+"&tipo="+tipo;
+                window.location = "consulta_contato_resultado.php?pesq="+pesq+"&tipo="+tipo;
               }else if(tipo == 2){
-                var pesq = $('#tipo_pesq').val();
-                window.location = "consultar_contato_resultado.php?pesq="+pesq+"&tipo="+tipo;
-              }else if(tipo==3){
                 var pesq = $('#pesq_nome').val();
-                window.location = "consultar_contato_resultado.php?pesq="+pesq+"&tipo="+tipo;
-              }else if(tipo == 4){
-                var pesq = $('#fornecedor_pesq').val();
-                window.location = "consultar_contato_resultado.php?pesq="+pesq+"&tipo="+tipo;
+                window.location = "consulta_contato_resultado.php?pesq="+pesq+"&tipo="+tipo;
               }
-            });
+            });   
 
 
           });
