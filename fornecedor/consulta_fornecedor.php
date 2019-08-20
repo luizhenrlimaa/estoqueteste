@@ -83,19 +83,19 @@
               </div>
 
               <div class="input-field col m2 s5 " id="nome">
-                <input placeholder="Nome" id="pesq_nome" name="pesq_nome" type="text">
+                <input placeholder="Nome" id="nome_123" name="pesq_nome" type="text">
               </div>
 
               <div class="input-field col m2 s5 hide" id="cnpj">
-                <input placeholder="CNPJ" id="pesq_nome" name="pesq_nome" type="text">
+                <input placeholder="CNPJ" id="cnpj_123" name="pesq_nome" type="text">
               </div>
 
               <div class="input-field col m2 s5 hide" id="email">
-                <input placeholder="E-mail" id="pesq_nome" name="pesq_nome" type="text">
+                <input placeholder="E-mail" id="email_123" name="pesq_nome" type="text">
               </div>
 
               <div class="input-field col m2 s5 hide" id="ie">
-                <input placeholder="Inscrição Estadual" id="pesq_nome" name="pesq_nome" type="text">
+                <input placeholder="Inscrição Estadual" id="ie_123" name="pesq_nome" type="text">
               </div>
 
               <div class="input-field col m1 s1">
@@ -250,17 +250,20 @@
           e.preventDefault();
           var tipo = $('#tipo').val();
           if (tipo == 0){
-            var pesq = $('#pesq_nome').val();
+            var pesq = $('#nome_123').val();
             if(pesq == ""){
               return toastr.error('Preencha o campo de pesquisa!');
             }else{
               window.location = "consulta_fornecedor_resultado.php?pesq="+pesq+"&tipo="+tipo;
             }
           }else if(tipo == 1){
-            var pesq = $('#pesq_nome').val();
+            var pesq = $('#cnpj_123').val();
             window.location = "consulta_fornecedor_resultado.php?pesq="+pesq+"&tipo="+tipo;
           }else if(tipo == 2){
-            var pesq = $('#pesq_nome').val();
+            var pesq = $('#email_123').val();
+            window.location = "consulta_fornecedor_resultado.php?pesq="+pesq+"&tipo="+tipo;
+          }else if(tipo == 3){
+            var pesq = $('#ie_123').val();
             window.location = "consulta_fornecedor_resultado.php?pesq="+pesq+"&tipo="+tipo;
           }
         });          
