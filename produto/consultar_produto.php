@@ -255,40 +255,30 @@
               });
             });
 
-          $(".apagar").click( function(event) {
-            var apagar = confirm('Deseja realmente excluir este registro?');
-            if (apagar){
-              var id = $(this).attr('id');
-              $.ajax({
-                url: '../engine/controllers/produto.php',
-                data: {
-                  fk_fornecedor : id,
-                  action: 'update_fornecedor'
-                },
-                //garante que seja executado na sequencia
-                async: false,
-                type: 'POST'
-              });
-              $.ajax({
-                url: '../engine/controllers/produto.php',
-                data: {
-                  id : id,
-                  action: 'delete'
-                },
-                success: function(data) {
-                  if(data === 'true'){
-                    Materialize.toast("Solicitação excluida.", 3000, "rounded", function(){
-                      location.reload();
-                    });
-                  }
-                },
-                async: false,
-                type: 'POST'
-              });      
-            }else{
-             event.preventDefault();
-           } 
-         });
+            $(".apagar").click( function(event) {
+              var apagar = mbox.confirm('Deseja realmente excluir este registro?');
+              if (apagar){
+                var id = $(this).attr('id');
+                $.ajax({
+                  url: '../engine/controllers/produto.php',
+                  data: {
+                    id : id,
+                    action: 'delete'
+                  },
+                  success: function(data) {
+                    if(data === 'true'){
+                      Materialize.toast("Solicitação excluida.", 3000, "rounded", function(){
+                        location.reload();
+                      });
+                    }
+                  },
+                  async: false,
+                  type: 'POST'
+                });      
+              }else{
+               event.preventDefault();
+             } 
+           });
 
             $("#tipo").change(function(){
               var tipo = $('#tipo').val();
