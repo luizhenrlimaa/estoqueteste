@@ -66,7 +66,7 @@
          $quantidade = $valores['quantidade'];
          $custo = $valores['valor'];
          $fk = $valores['fk_fornecedor'];
-         $cfop = $cfop['fk_cfop'];
+         $cfop = $cfop['cfop'];
 
          switch ($valores['tipo']) {
           case '0': $tipo = "Caixa"; break;
@@ -202,7 +202,7 @@
           tipo : tipo,
           valor: valor_produto,
           fk_fornecedor: fornecedor,
-          fk_cfop: cfop,
+          cfop: cfop,
 
           action: 'update'
         },

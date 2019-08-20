@@ -49,7 +49,7 @@
       </style>
     </head>
     <body>
-      <nav style="background:#2980b9 ;">
+      <nav style="background:#708090;">
         <div class="nav-wrapper">
           <ul class="hide-on-med-and-down">
             <li><a href="../index.php" class="brand-logo"><i class="material-icons">cloud</i>Estoque</a></li>
@@ -74,12 +74,13 @@
             <form class="col s12">
               <div class="col m7 s12"></div>
               <div class="input-field col m2 s4">
-                <select id="tipo" name="tipo">
+                <select onchange="prod()" id="tipo" name="tipo">
                   <option value="0">Nome</option>
                   <option value="1">Quantidade</option>
                   <option value="2">Tipo</option>
                   <option value="3">Valor</option>
                   <option value="4">Fornecedor</option>
+                  <option value="5">CFOP</option>
                 </select> 
               </div>
 
@@ -109,13 +110,26 @@
                 </select>
               </div>
 
-              <div class="input-field col m2 s5" id="solici_aberto">
-                <input placeholder="Pesquisar por..." id="pesq_nome" name="pesq_nome" type="text">
+              <div class="input-field col m2 s5" id="nome">
+                <input placeholder="Nome" id="pesq_nome" name="pesq_nome" type="text">
+              </div>
+
+              <div class="input-field col m2 s5 hide" id="quantidade">
+                <input placeholder="Quantidade" id="pesq_nome" name="pesq_nome" type="text">
+              </div>
+
+              <div class="input-field col m2 s5 hide" id="valor">
+                <input placeholder="Valor" id="pesq_nome" name="pesq_nome" type="text">
+              </div>
+              <div class="input-field col m2 s5 hide" id="cfop">
+                <input placeholder="CFOP" id="pesq_nome" name="pesq_nome" type="text">
               </div>
 
               <div class="input-field col m1 s1">
                 <a class="waves-effect waves-light btn" style="background: #2980b9;" id="pesquisar"><i class="fa fa-search"></i></a>
               </div>
+
+
             </form>
           </div>
 
@@ -131,11 +145,14 @@
           }else if($tipo == 1){
             $tipo = 't2.quantidade';
           }else if($tipo == 2){
-            $tipo = 't2.tipo';
+            $tipo = 't2.tipo_select';
           }else if($tipo == 3){
             $tipo = 't2.valor';
           }else if($tipo == 4){
-            $tipo = 't2.fk_fornecedor';
+            $tipo = 't2.fornecedor_select';
+          }
+          else if($tipo == 5){
+            $tipo = 't2.cfop';
           }
 
           $x = new Produto();
@@ -163,13 +180,14 @@
             ?>
 
             <table class="responsive-table centered">
-              <thead style="background: #2980b9; color: #fff;">
+              <thead style="background: #708090; color: #fff;">
                 <tr>
                   <th>Nome</th>
                   <th>Quantidade</th>
                   <th>Tipo</th>
                   <th>Valor R$</th>
                   <th>Fornecedor</th>
+                  <th>CFOP</th>
                   <th>Apagar</th>
                 </tr>
               </thead>
@@ -201,6 +219,7 @@
                     <td class="det" id="<?php echo $val['id']; ?>"><?php echo $tipo_produto;?></td>
                     <td class="det" id="<?php echo $val['id']; ?>"><?php echo "R$ ", $custo, ",00";?></td>
                     <td class="det" id="<?php echo $val['id']; ?>"><?php echo $fornecedor;?></td>
+                    <td class="det" id="<?php echo $val['id']; ?>"><?php echo $cfop;?></td>
                     <td class="apagar" id="<?php echo $val['id']; ?>"><i class="fa fa-trash fa-lg"></i> </td>
                   </tr>
                 <?php } ?>
@@ -243,108 +262,133 @@
         <script src="../js/drop_materialize.js"></script>
 
         <script type="text/javascript">
-          $(document).ready(function(){
-            $('.det').click(function(e) {
-              var id = $(this).attr('id');
-              window.location = "edita_produto.php?id="+id;
-            });
-
-            $('.getout').click(function(e) {
-              e.preventDefault();
-
-              $.ajax({
-                url: '../engine/controllers/logout.php',
-                data: {},
-                success: function(data) {
-                  if(data === 'kickme'){
-                    document.location.href = '../login.php';
-                  } else {
-                    return mbox.alert('Erro ao conectar com banco de dados. Aguarde e tente novamente em alguns instantes.');
-                  }
-                },
-                type: 'POST'
-              });
-            });
-
-            $(".apagar").click( function(event) {
-              var apagar = confirm('Deseja realmente excluir este registro?');
-              if (apagar){
-                var id = $(this).attr('id');
-                $.ajax({
-                  url: '../engine/controllers/produto.php',
-                  data: {
-                    id : id,
-
-                    action: 'delete'
-                  },
-                  success: function(data) {
-                    if(data === 'true'){
-                      Materialize.toast("Solicitação excluida.", 3000, "rounded", function(){
-                        location.reload();
-                      });
-                    }
-                  },
-                  async: false,
-                  type: 'POST'
-                });      
-              }else{
-               event.preventDefault();
-             } 
-           });
 
 
-            $("#tipo").change(function(){
-              var tipo = $('#tipo').val();
 
-              if(tipo == 0){
-                $("#solici_aberto").removeClass("hide");
-                $("#tipo_select").addClass("hide");
-                $("#fornecedor_select").addClass("hide");
-              }else if(tipo == 1){
-                $("#solici_aberto").removeClass("hide");
-                $("#tipo_select").addClass("hide");
-                $("#fornecedor_select").addClass("hide");
-              }else if(tipo == 2){
-                $("#solici_aberto").addClass("hide");
-                $("#tipo_select").removeClass("hide");
-                $("#fornecedor_select").addClass("hide");
-              }else if(tipo == 3){
-                $("#solici_aberto").removeClass("hide");
-                $("#tipo_select").addClass("hide");
-                $("#fornecedor_select").addClass("hide");
-              }else if (tipo == 4){
-                $("#solici_aberto").addClass("hide");
-                $("#tipo_select").addClass("hide");
-                $("#fornecedor_select").removeClass("hide");
+          function prod(){
+            var tipo = $('#tipo').val();
+
+            if(tipo == 0){
+              $("#nome").removeClass("hide");
+              $("#quantidade").addClass("hide");
+              $("#tipo_select").addClass("hide");
+              $("#valor").addClass("hide");
+              $("#fornecedor_select").addClass("hide");
+              $("#cfop").addClass("hide");
+            }else if(tipo == 1){
+             $("#nome").addClass("hide");
+             $("#quantidade").removeClass("hide");
+             $("#tipo_select").addClass("hide");
+             $("#valor").addClass("hide");
+             $("#fornecedor_select").addClass("hide");
+             $("#cfop").addClass("hide");
+           }else if(tipo == 2){
+            $("#nome").addClass("hide");
+            $("#quantidade").addClass("hide");
+            $("#tipo_select").removeClass("hide");
+            $("#valor").addClass("hide");
+            $("#fornecedor_select").addClass("hide");
+            $("#cfop").addClass("hide");
+          }else if(tipo == 3){
+           $("#nome").addClass("hide");
+           $("#quantidade").addClass("hide");
+           $("#tipo_select").addClass("hide");
+           $("#valor").removeClass("hide");
+           $("#fornecedor_select").addClass("hide");
+           $("#cfop").addClass("hide");
+         }else if (tipo == 4){
+           $("#nome").addClass("hide");
+           $("#quantidade").addClass("hide");
+           $("#tipo_select").addClass("hide");
+           $("#valor").addClass("hide");
+           $("#fornecedor_select").removeClass("hide");
+           $("#cfop").addClass("hide");
+         }else if (tipo == 5){
+          $("#nome").addClass("hide");
+          $("#quantidade").addClass("hide");
+          $("#tipo_select").addClass("hide");
+          $("#valor").addClass("hide");
+          $("#fornecedor_select").addClass("hide");
+          $("#cfop").removeClass("hide");
+        }
+      };
+
+
+      $(document).ready(function(){
+        $('.det').click(function(e) {
+          var id = $(this).attr('id');
+          window.location = "edita_produto.php?id="+id;
+        });
+
+        $('.getout').click(function(e) {
+          e.preventDefault();
+
+          $.ajax({
+            url: '../engine/controllers/logout.php',
+            data: {},
+            success: function(data) {
+              if(data === 'kickme'){
+                document.location.href = '../login.php';
+              } else {
+                return mbox.alert('Erro ao conectar com banco de dados. Aguarde e tente novamente em alguns instantes.');
               }
-            });
-
-
-            $('#pesquisar').click(function(e) {
-              e.preventDefault();
-              var tipo = $('#tipo').val();
-              if (tipo == 0){
-                var pesq = $('#pesq_nome').val();
-                if(pesq == ""){
-                  return toastr.error('Preencha o campo de pesquisa!');
-                }else{
-                  window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
-                }
-              }else if(tipo == 1){
-                var pesq = $('#pesq_nome').val();
-                window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
-              }else if(tipo == 2){
-                var pesq = $('#tipo_pesq').val();
-                window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
-              }else if(tipo==3){
-                var pesq = $('#pesq_nome').val();
-                window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
-              }else if(tipo == 4){
-                var pesq = $('#fornecedor_pesq').val();
-                window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
-              }
-            });
-
-
+            },
+            type: 'POST'
           });
-        </script>
+        });
+
+        $(".apagar").click( function(event) {
+          var apagar = confirm('Deseja realmente excluir este registro?');
+          if (apagar){
+            var id = $(this).attr('id');
+            $.ajax({
+              url: '../engine/controllers/produto.php',
+              data: {
+                id : id,
+
+                action: 'delete'
+              },
+              success: function(data) {
+                if(data === 'true'){
+                  Materialize.toast("Solicitação excluida.", 3000, "rounded", function(){
+                    location.reload();
+                  });
+                }
+              },
+              async: false,
+              type: 'POST'
+            });      
+          }else{
+           event.preventDefault();
+         } 
+       });
+
+ $('#pesquisar').click(function(e) {
+      e.preventDefault();
+      var tipo = $('#tipo').val();
+      if (tipo == 0){
+        var pesq = $('#nome').val();
+        if(pesq == ""){
+          return toastr.error('Preencha o campo de pesquisa!');
+        }else{
+          window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
+        }
+      }else if(tipo == 1){
+        var pesq = $('#quantidade').val();
+        window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
+      }else if(tipo == 2){
+        var pesq = $('#tipo_select').val();
+        window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
+      }else if(tipo==3){
+        var pesq = $('#valor').val();
+        window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
+      }else if(tipo == 4){
+        var pesq = $('#fornecedor_select').val();
+        window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
+      }else if(tipo == 5){
+       var pesq = $('#cfop').val();
+       window.location = "consultar_produto_resultado.php?pesq="+pesq+"&tipo="+tipo;
+     }
+
+      });
+    </script>

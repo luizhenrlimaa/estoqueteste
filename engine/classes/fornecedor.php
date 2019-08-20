@@ -67,6 +67,21 @@ class Fornecedor{
 		return $realData;
 	}
 
+	public function Read($id) {
+		$sql = "
+		SELECT * FROM fornecedor WHERE id  = '$id'
+		";
+
+		$DB = new DB();
+		$DB->open();
+		$Data = $DB->fetchData($sql);
+
+		$DB->close();
+		return $Data[0];
+	}
+
+
+
 	public function ReadAll(){
 		$sql = "SELECT *FROM fornecedor";
 		
@@ -89,18 +104,7 @@ class Fornecedor{
 		return $realData;
 	}
 
-	public function Read($id) {
-		$sql = "
-		SELECT * FROM fornecedor WHERE id  = '$id'
-		";
 
-		$DB = new DB();
-		$DB->open();
-		$Data = $DB->fetchData($sql);
-
-		$DB->close();
-		return $Data[0];
-	}
 
 	public function ReadAll_FK($id) {
 		$sql = "
@@ -172,6 +176,21 @@ class Fornecedor{
 		$DB->close();
 		return $result;
 	}
+
+	public function ReadAll_Paginacao($inicio, $registros) {
+		$sql = "
+		SELECT * FROM fornecedor LIMIT $inicio, $registros
+		";
+
+		$DB = new DB();
+		$DB->open();
+		$Data = $DB->fetchData($sql);
+
+		$DB->close();
+		return $Data;
+	}
+
+
 
 	public function Delete(){
 		$sql = "

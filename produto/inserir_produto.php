@@ -118,7 +118,7 @@
                   <label>Fornecedor*</label>
                 </div>
                  <div class="input-field col m6 s12">
-                  <input id="cfop_produto" name="cfop_produto" type="text">
+                  <input id="cfop" name="cfop" type="text">
                   <label>CFOP*</label>
                 </div>
               </div>
@@ -170,10 +170,10 @@
           var id_usuario = '<?php echo $_SESSION['id'];?>';
           var fornecedor = $('#fornecedor').val();
           var valor_produto = $('#valor_produto').val();
-          var cfop_produto = $('#cfop_produto').val();
+          var cfop = $('#cfop').val();
 
 
-          if(nome_produto == "" || quantidade_produto == "" || tipo_produto == ""|| fornecedor=="" || valor_produto=="" || cfop_produto==""){
+          if(nome_produto == "" || quantidade_produto == "" || tipo_produto == ""|| fornecedor=="" || valor_produto=="" || cfop==""){
             return mbox.alert('Preencha todos os campos que possuem *');
           }else {
             $.ajax({
@@ -185,7 +185,7 @@
                 tipo: tipo_produto,
                 valor: valor_produto,
                 fk_fornecedor: fornecedor,
-                cfop: cfop_produto,
+                cfop: cfop,
 
                 action: 'create'
               },
